@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://c6xgxoowq4aao"]
+
+[ext_resource type="Script" path="res://resources/updates/ability_upgrade.gd" id="1_v7xvn"]
+
+[resource]
+script = ExtResource("1_v7xvn")
+ability_id = "water_slime_damage"
+max_quantity = 0
+ability_name = "Water slime damage"
+ability_desc = "Your water slimes get +15% attack damage"

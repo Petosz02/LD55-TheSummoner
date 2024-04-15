@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8hkktxklgjbo"]
+
+[ext_resource type="PackedScene" uid="uid://ciiybetorolt2" path="res://Sceenes/Components/health_component.tscn" id="1_7ildv"]
+[ext_resource type="Script" path="res://Scripts/imp_enemy.gd" id="1_gu4lf"]
+[ext_resource type="PackedScene" uid="uid://d0oti5qn53j3t" path="res://Sceenes/Components/death_component.tscn" id="2_kipkg"]
+[ext_resource type="Texture2D" uid="uid://dl6x0gq7bkf7e" path="res://Sprites/imp.png" id="3_2rsbi"]
+[ext_resource type="PackedScene" uid="uid://b50y0sdflqrj6" path="res://Sceenes/Components/hurt_box.tscn" id="4_6gbsa"]
+[ext_resource type="PackedScene" uid="uid://buk5k7n7dec4b" path="res://Sceenes/Components/velocity_component.tscn" id="6_ddoe7"]
+[ext_resource type="PackedScene" uid="uid://7ywdnnv4yv2g" path="res://Sceenes/Components/exp_drop.tscn" id="7_x1cmm"]
+[ext_resource type="PackedScene" uid="uid://clj4nu7k0ge5a" path="res://Sceenes/Components/hit_box.tscn" id="8_lueed"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b7iax"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_svn4s"]
+radius = 5.0
+
+[node name="ImpEnemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_gu4lf")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_7ildv")]
+max_health = 25.0
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("sprite", "healt_component") instance=ExtResource("2_kipkg")]
+sprite = NodePath("../Visuals/Sprite2D")
+healt_component = NodePath("../HealthComponent")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("healt_component") instance=ExtResource("4_6gbsa")]
+collision_mask = 12
+healt_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_b7iax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_svn4s")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("3_2rsbi")
+offset = Vector2(0, -8)
+
+[node name="VelocityComponent" parent="." instance=ExtResource("6_ddoe7")]
+max_speed = 50
+
+[node name="ExpDrop" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("7_x1cmm")]
+health_component = NodePath("../HealthComponent")
+drop_percente = 0.7
+
+[node name="HitBox" parent="." instance=ExtResource("8_lueed")]
+collision_layer = 16
+damage = 5.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_b7iax")

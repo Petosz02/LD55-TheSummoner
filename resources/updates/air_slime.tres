@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://f81aoij6s35o"]
+
+[ext_resource type="PackedScene" uid="uid://c1ryt32lw646l" path="res://Sceenes/Abbilities/air_slime_controller.tscn" id="1_7tb2b"]
+[ext_resource type="Script" path="res://resources/updates/ability.gd" id="1_k1b5m"]
+
+[resource]
+script = ExtResource("1_k1b5m")
+ability_controller_scene = ExtResource("1_7tb2b")
+ability_id = "air_slime"
+max_quantity = 1
+ability_name = "Air slime"
+ability_desc = "You can summon air slimes. They are fast and hit hard, but they lose HP over time"

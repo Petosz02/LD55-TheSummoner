@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://1ewyukwenr12"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyManager.gd" id="1_w6nvk"]
+[ext_resource type="PackedScene" uid="uid://cg4et2fybhflo" path="res://Sceenes/orb_enemy.tscn" id="2_rpqkd"]
+[ext_resource type="PackedScene" uid="uid://c8hkktxklgjbo" path="res://Sceenes/imp_enemy.tscn" id="3_6r5qv"]
+
+[node name="EnemyManager" type="Node"]
+script = ExtResource("1_w6nvk")
+orb_enemy_scene = ExtResource("2_rpqkd")
+imp_enemy_scene = ExtResource("3_6r5qv")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

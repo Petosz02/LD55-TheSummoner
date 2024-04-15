@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://igu5h86y5i2o"]
+
+[ext_resource type="Script" path="res://Scripts/air_slime.gd" id="1_s2gag"]
+[ext_resource type="Texture2D" uid="uid://bgop7ne6s0hks" path="res://Sprites/airSlime.png" id="2_v66jp"]
+[ext_resource type="PackedScene" uid="uid://ciiybetorolt2" path="res://Sceenes/Components/health_component.tscn" id="3_5f362"]
+[ext_resource type="PackedScene" uid="uid://bhcjuewx83a4s" path="res://Sceenes/Components/health_bar.tscn" id="4_gwbs4"]
+[ext_resource type="PackedScene" uid="uid://clj4nu7k0ge5a" path="res://Sceenes/Components/hit_box.tscn" id="5_wt7b1"]
+[ext_resource type="PackedScene" uid="uid://b50y0sdflqrj6" path="res://Sceenes/Components/hurt_box.tscn" id="6_2ya1g"]
+[ext_resource type="PackedScene" uid="uid://d0oti5qn53j3t" path="res://Sceenes/Components/death_component.tscn" id="7_4rdtg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a5ytx"]
+radius = 4.12311
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_syese"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fvnus"]
+radius = 3.16228
+
+[node name="AirSlime" type="CharacterBody2D" groups=["slime"]]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_s2gag")
+max_speed = 80
+acceleration = 20
+attack_range = 200
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_a5ytx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_v66jp")
+offset = Vector2(0, -8)
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_5f362")]
+
+[node name="HealthBar" parent="." instance=ExtResource("4_gwbs4")]
+
+[node name="HitBox" parent="." instance=ExtResource("5_wt7b1")]
+collision_layer = 8
+damage = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_syese")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("healt_component") instance=ExtResource("6_2ya1g")]
+collision_mask = 16
+healt_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_fvnus")
+
+[node name="SelfDamageTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("sprite", "healt_component") instance=ExtResource("7_4rdtg")]
+sprite = NodePath("../Sprite2D")
+healt_component = NodePath("../HealthComponent")

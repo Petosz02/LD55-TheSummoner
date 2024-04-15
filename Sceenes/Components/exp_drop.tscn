@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://7ywdnnv4yv2g"]
+
+[ext_resource type="Script" path="res://Scripts/exp_drop.gd" id="1_ofa0c"]
+[ext_resource type="PackedScene" uid="uid://dp7vxlemnob3f" path="res://Sceenes/exp_crystal.tscn" id="2_23ho5"]
+
+[node name="ExpDrop" type="Node"]
+script = ExtResource("1_ofa0c")
+exp_crystal_scene = ExtResource("2_23ho5")

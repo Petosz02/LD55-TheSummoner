@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b50y0sdflqrj6"]
+
+[ext_resource type="Script" path="res://Scripts/hurt_box.gd" id="1_msuj6"]
+[ext_resource type="PackedScene" uid="uid://b5neyagblfu1h" path="res://Sceenes/floating_text.tscn" id="2_b5ib5"]
+
+[node name="HurtBox" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_msuj6")
+float_text = ExtResource("2_b5ib5")
+
+[node name="DOT" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

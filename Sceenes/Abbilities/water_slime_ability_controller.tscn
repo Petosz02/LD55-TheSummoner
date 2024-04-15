@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bylcx32jyxp1i"]
+
+[ext_resource type="Script" path="res://Scripts/water_slime_ability_controller.gd" id="1_ldq2d"]
+[ext_resource type="PackedScene" uid="uid://dhijpkg5cjf2k" path="res://Sceenes/Abbilities/water_slime_ability.tscn" id="2_hb6l6"]
+
+[node name="WaterSlimeAbilityController" type="Node"]
+script = ExtResource("1_ldq2d")
+water_slime_scene = ExtResource("2_hb6l6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true

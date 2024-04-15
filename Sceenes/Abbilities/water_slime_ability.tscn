@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://dhijpkg5cjf2k"]
+
+[ext_resource type="Script" path="res://Scripts/water_slime_ability.gd" id="1_fegfw"]
+[ext_resource type="PackedScene" uid="uid://ciiybetorolt2" path="res://Sceenes/Components/health_component.tscn" id="1_yo23b"]
+[ext_resource type="Texture2D" uid="uid://1gv802576mna" path="res://Sprites/waterSlime.png" id="1_yohjm"]
+[ext_resource type="PackedScene" uid="uid://clj4nu7k0ge5a" path="res://Sceenes/Components/hit_box.tscn" id="2_espqh"]
+[ext_resource type="PackedScene" uid="uid://bhcjuewx83a4s" path="res://Sceenes/Components/health_bar.tscn" id="3_d8qia"]
+[ext_resource type="PackedScene" uid="uid://b50y0sdflqrj6" path="res://Sceenes/Components/hurt_box.tscn" id="3_jers2"]
+[ext_resource type="PackedScene" uid="uid://d0oti5qn53j3t" path="res://Sceenes/Components/death_component.tscn" id="7_vg4x6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6740"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g1n6n"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cr0tl"]
+radius = 4.0
+
+[node name="WaterSlimeAbility" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_fegfw")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_yo23b")]
+max_health = 15.0
+
+[node name="HealthBar" parent="." instance=ExtResource("3_d8qia")]
+offset_top = -15.0
+offset_bottom = -11.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yohjm")
+offset = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_l6740")
+
+[node name="HitBox" parent="." groups=["slime"] instance=ExtResource("2_espqh")]
+collision_layer = 8
+damage = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_g1n6n")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("healt_component") instance=ExtResource("3_jers2")]
+collision_mask = 16
+healt_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_cr0tl")
+
+[node name="SelfDamageTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("sprite", "healt_component") instance=ExtResource("7_vg4x6")]
+sprite = NodePath("../Sprite2D")
+healt_component = NodePath("../HealthComponent")

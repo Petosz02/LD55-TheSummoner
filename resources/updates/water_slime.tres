@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://c7ansy1id80o0"]
+
+[ext_resource type="PackedScene" uid="uid://bylcx32jyxp1i" path="res://Sceenes/Abbilities/water_slime_ability_controller.tscn" id="1_df7og"]
+[ext_resource type="Script" path="res://resources/updates/ability.gd" id="2_k6cho"]
+
+[resource]
+script = ExtResource("2_k6cho")
+ability_controller_scene = ExtResource("1_df7og")
+ability_id = "water_slime"
+max_quantity = 1
+ability_name = "Summon water slime"
+ability_desc = "Let you sumon a water slime. They are strong but the slime will lose HP over time"

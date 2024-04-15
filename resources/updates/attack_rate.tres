@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://btxyfrqk1ob5e"]
+
+[ext_resource type="Script" path="res://resources/updates/ability_upgrade.gd" id="1_tqoyd"]
+
+[resource]
+script = ExtResource("1_tqoyd")
+ability_id = "attack_rate"
+max_quantity = 6
+ability_name = "Base attack speed"
+ability_desc = "Your basic attack get +10% attackspeed"

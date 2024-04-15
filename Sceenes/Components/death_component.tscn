@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0oti5qn53j3t"]
+
+[ext_resource type="Texture2D" uid="uid://cpy6pmkoe7mkm" path="res://Sprites/orb.png" id="1_5xl5h"]
+[ext_resource type="Script" path="res://Scripts/death_component.gd" id="1_qremy"]
+
+[sub_resource type="Animation" id="Animation_fu066"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_4fbvw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_re7bp"]
+_data = {
+"RESET": SubResource("Animation_4fbvw"),
+"default": SubResource("Animation_fu066")
+}
+
+[sub_resource type="Curve" id="Curve_ut1vy"]
+_data = [Vector2(0, 1), 0.0, 1.60259, 0, 0, Vector2(0.209974, 1), -2.32518, -2.32518, 0, 0, Vector2(0.608924, 0.783114), 1.7886, 1.7886, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_sd28j"]
+offsets = PackedFloat32Array(0.436261, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="DeathComponent" type="Node2D"]
+script = ExtResource("1_qremy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_re7bp")
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+texture = ExtResource("1_5xl5h")
+direction = Vector2(0, -1)
+spread = 10.8
+gravity = Vector2(0, 600)
+initial_velocity_min = 106.15
+initial_velocity_max = 201.15
+angular_velocity_min = -302.55
+angular_velocity_max = 309.6
+scale_amount_curve = SubResource("Curve_ut1vy")
+color_ramp = SubResource("Gradient_sd28j")

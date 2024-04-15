@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1ryt32lw646l"]
+
+[ext_resource type="Script" path="res://Scripts/air_slime_controller.gd" id="1_56s7x"]
+[ext_resource type="PackedScene" uid="uid://igu5h86y5i2o" path="res://Sceenes/Abbilities/air_slime.tscn" id="2_bjhwk"]
+
+[node name="AirSlimeController" type="Node"]
+script = ExtResource("1_56s7x")
+slime_scene = ExtResource("2_bjhwk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true

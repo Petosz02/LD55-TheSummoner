@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityUpgrade" load_steps=2 format=3 uid="uid://cxtal4pevppfu"]
+
+[ext_resource type="Script" path="res://resources/updates/ability_upgrade.gd" id="1_dgc0m"]
+
+[resource]
+script = ExtResource("1_dgc0m")
+ability_id = "attack_damage"
+max_quantity = 0
+ability_name = "Base attack damage"
+ability_desc = "Add  +15% damage to the basick attack"
